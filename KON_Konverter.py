@@ -33,11 +33,12 @@ import csv
 # Define the logging function
 logger = logging.getLogger(__name__)
 
+
 def main():
     """Run the main function on all files in a folder."""
     top_folder = folder_dialog(initialdir=os.path.expanduser("~"))
 
-    if top_folder == None:
+    if top_folder is None:
         logger.info('No folder selected.')
         return
 
@@ -49,8 +50,9 @@ def main():
         df = read_and_change_file(filename)
         # print(df)
 
+        # Calculate the path relative to the top_folder, to allow replacing
+        # only the top folder but keep all the subdirectories the same.
         rel_path = os.path.relpath(filename, top_folder)
-
         new_path = os.path.join(top_folder+'_converted', rel_path)
 
         if not os.path.exists(os.path.dirname(new_path)):
@@ -59,7 +61,7 @@ def main():
         if os.path.splitext(filename)[1] in ['.xlsx', '.xls']:
             df.to_excel(new_path)
         else:  # With CSV, we need a specific format
-            df.to_csv(new_path, sep=';', quoting=csv.QUOTE_ALL)
+            df.to_csv(new_path, sep=';', decimal=',', quoting=csv.QUOTE_ALL)
 
         print(new_path)  # Print the created files
 
@@ -78,28 +80,37 @@ def main_file():
         if os.path.splitext(filename)[1] in ['.xlsx', '.xls']:
             df.to_excel(filename_new)
         else:  # With CSV, we need a specific format
-            df.to_csv(filename_new, sep=';', quoting=csv.QUOTE_ALL)
+            df.to_csv(filename_new, sep=';', decimal=',', quoting=csv.QUOTE_ALL)
 
         print(filename_new)
 
+
 def read_and_change_file(filename):
+    """Read a file and change the column headers.
+
+    Return a Pandas DataFrame.
+    """
 
     if os.path.splitext(filename)[1] in ['.xlsx', '.xls']:
         df = pd.read_excel(filename, index_col=0)
     else:
-        df = pd.read_csv(filename, index_col=0, sep=';')
+        df = pd.read_csv(filename, index_col=0, sep=';', decimal=',',
+                         thousands='.')
 
     rename_dict = dict()
     for col in df.columns:
-        rename_dict[col] = change_column(col)
+        rename_dict[col] = change_column_header(col)
 
     df.rename(columns=rename_dict, inplace=True)
 
     return df
 
 
-def change_column(col):
-    """Replace and filter the column header text."""
+def change_column_header(col):
+    """Replace and filter the column header text.
+
+    Replace German umlaute and keep only the text before the second comma.
+    """
     import re
 
     col = re.sub('ä', 'ae', col)  # replace

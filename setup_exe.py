@@ -15,7 +15,6 @@
 
 """Convert spreadsheet headers to Ennovatis in the Konstanz project.
 
-
 Setup script
 ------------
 
@@ -34,8 +33,8 @@ To create a standalone installer:
 Known issues
 ------------
 
-With cx_Freeze 6.1, an error appeared about not beeing able to find
-the generated exe file at the path ``build/exe.win-amd64-3.7/KON_Konverter.exe``.
+With cx_Freeze 6.1, an error appeared about not beeing able to find the
+generated exe file at the path ``build/exe.win-amd64-3.7/KON_Konverter.exe``.
 Following the error trace and replacing ``exe.targetName`` with
 ``os.path.abspath(exe.targetName)`` solved the issue.
 
@@ -222,7 +221,7 @@ setup(
                                os.path.join(mkl_dlls, 'mkl_vml_avx2.dll'),
                                os.path.join(mkl_dlls, 'mkl_vml_def.dll'),
                                os.path.join(mkl_dlls, 'mkl_intel_thread.dll'),
-                                r'./res/icon.png',
+                               r'./res/icon.png',
                                ]
                            },
              'bdist_msi': {'data': {"Shortcut": shortcut_table},
