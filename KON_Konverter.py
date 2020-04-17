@@ -28,7 +28,6 @@ import pandas as pd
 import os
 import glob
 import logging
-import csv
 
 # Define the logging function
 logger = logging.getLogger(__name__)
@@ -61,7 +60,7 @@ def main():
         if os.path.splitext(filename)[1] in ['.xlsx', '.xls']:
             df.to_excel(new_path)
         else:  # With CSV, we need a specific format
-            df.to_csv(new_path, sep=';', decimal=',', quoting=csv.QUOTE_ALL)
+            df.to_csv(new_path, sep=';', decimal=',')
 
         print(new_path)  # Print the created files
 
@@ -80,7 +79,7 @@ def main_file():
         if os.path.splitext(filename)[1] in ['.xlsx', '.xls']:
             df.to_excel(filename_new)
         else:  # With CSV, we need a specific format
-            df.to_csv(filename_new, sep=';', decimal=',', quoting=csv.QUOTE_ALL)
+            df.to_csv(filename_new, sep=';', decimal=',')
 
         print(filename_new)
 
