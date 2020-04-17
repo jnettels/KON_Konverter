@@ -119,7 +119,7 @@ setup(
     license='GPL-3.0',
     author='Joris Zimmermann',
     author_email='joris.zimmermann@stw.de',
-    url='https://github.com/jnettels/lpagg',
+    url='https://github.com/jnettels/KON_Konverter',
 
     # Options for building the Windows .exe
     executables=[Executable(r'KON_Konverter.py',
