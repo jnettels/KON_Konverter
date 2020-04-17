@@ -1,7 +1,9 @@
-## KON-Konverter
+KON-Konverter
+=============
 Convert spreadsheet headers to Ennovatis in the Konstanz project.
 
-# Usage
+Usage
+-----
 - Launching the program shows a file dialog. Please choose a folder.
 - All .csv files in all subfolders will be found and converted.
 - The converted files will be stored in a parallel folder structure.
@@ -28,6 +30,7 @@ If the folder **TOP-Folder** is selected by the user, a new folder
 files. If the new folder already exists, all files within are overwritten
 without warning.
 
-# Contact
-Franziska Bockelmann: For the data
-Joris Zimmermann: For this program
+Contact
+-------
+- Franziska Bockelmann: For the data
+- Joris Zimmermann: For this program
