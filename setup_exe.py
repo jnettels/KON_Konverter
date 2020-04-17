@@ -221,7 +221,8 @@ setup(
                                os.path.join(mkl_dlls, 'mkl_vml_avx2.dll'),
                                os.path.join(mkl_dlls, 'mkl_vml_def.dll'),
                                os.path.join(mkl_dlls, 'mkl_intel_thread.dll'),
-                               r'./res/icon.png',
+                               r'README.md',
+                               # r'./res/icon.png',
                                ]
                            },
              'bdist_msi': {'data': {"Shortcut": shortcut_table},
@@ -239,6 +240,3 @@ remove_folders = [
         ]
 for folder in remove_folders:
     shutil.rmtree(folder, ignore_errors=True)
-
-# Copy the README.md file to the build folder, changing extension to .txt
-shutil.copy2(r'.\README.md', r'.\build\exe.win-amd64-3.7\README.md')
